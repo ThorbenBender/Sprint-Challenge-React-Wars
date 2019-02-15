@@ -1,22 +1,23 @@
 import React, { Component } from 'react';
 import './App.css';
 import Characters from './components/Character';
-import skipPage from './components/skipPage';
+import SkipPage from './components/skipPage';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
       starwarsChars: [],
-      page: 1
+      next: '',
+      previous: ''
     };
   }
-  skipPage = event =>{
-
+  skipPage = URL => {
+    this.getCharacters(URL);
   }
   componentDidMount() {
     const { page } = this.state;
-    this.getCharacters('https://swapi.co/api/people/?page=' + page);
+    this.getCharacters('https://swapi.co/api/people/');
   }
 
   getCharacters = URL => {
@@ -28,8 +29,9 @@ class App extends Component {
         return res.json();
       })
       .then(data => {
-        console.log(URL);
         this.setState({ starwarsChars: data.results });
+        this.setState({next: data.next});
+        this.setState({previous: data.previous});
       })
       .catch(err => {
         throw new Error(err);
@@ -43,7 +45,7 @@ class App extends Component {
         <div className="characters">
           <Characters starwarsChars={this.state.starwarsChars} />
         </div>
-        <skipPage page={this.state.page} skipPage={this.skipPage}/> 
+        <SkipPage page={this.state.page} skipPage={this.skipPage} previous={this.state.previous} next={this.state.next}/> 
       </div>
     );
   }

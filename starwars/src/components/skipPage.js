@@ -1,15 +1,16 @@
 import React from 'react';
 import '../App.css';
 
-export default function skipPage(props){
+export default function SkipPage(props){
+    const { getCharacters } = props;
     return (
         <div>
             {
-                this.props.page === 1 ? 
-                null :
-                <button className="previous" onClick={(event) => skipPage(event)}>Previous</button>
+                props.previous === null ? 
+                null:
+                <button className="previous" onClick={(event) => props.skipPage(props.previous)}>Previous</button>
             }
-            <button className="next" onClick={(event) => props.skipPage(event)}>Next</button>
+            <button className="next" onClick={() =>  props.skipPage(props.next)}>Next</button>
         </div>
     )
 }
