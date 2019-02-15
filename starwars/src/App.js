@@ -29,9 +29,7 @@ class App extends Component {
         return res.json();
       })
       .then(data => {
-        this.setState({ starwarsChars: data.results });
-        this.setState({next: data.next});
-        this.setState({previous: data.previous});
+        this.setState({ starwarsChars: data.results, next: data.next, previous: data.previous });
       })
       .catch(err => {
         throw new Error(err);

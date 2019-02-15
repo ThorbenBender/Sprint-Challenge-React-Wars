@@ -10,7 +10,11 @@ export default function SkipPage(props){
                 null:
                 <button className="previous" onClick={(event) => props.skipPage(props.previous)}>Previous</button>
             }
-            <button className="next" onClick={() =>  props.skipPage(props.next)}>Next</button>
+            {
+                props.next === null ?
+                null:
+                <button className="next" onClick={() =>  props.skipPage(props.next)}>Next</button>
+            }
         </div>
     )
 }
